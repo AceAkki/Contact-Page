@@ -130,7 +130,7 @@ input::placeholder {
   color: var(--intput-text-color);
 }
 
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 .enquiry-form {
@@ -140,7 +140,7 @@ input[type=number] {
   top: 0;
   background: var(--main-bg-color);
   z-index: 10;
-   min-width: 100%;
+  min-width: 100%;
 }
 
 .form-group {
@@ -178,7 +178,12 @@ input[type=number] {
   max-height: 500px;
   position: absolute;
   z-index: 1;
-   min-width: 90%
+  min-width: 90%;
+}
+
+.cancel-btn {
+  float: right;
+  margin: 1rem 2rem;
 }
 
 .sendBtn {
