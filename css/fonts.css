@@ -1,0 +1,68 @@
+@import url('https://fonts.cdnfonts.com/css/helvetica-neue-55');
+
+/* Base font  */
+@font-face {
+  font-family: "Museo Slab";
+  src: url("../font/Museo_Slab_100.otf") format("opentype");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Museo Slab";
+  src: url("../font/Museo_Slab_300.otf") format("opentype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Museo Slab";
+  src: url("../font/Museo_Slab_500.otf") format("opentype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Museo Slab";
+  src: url("../font/Museo_Slab_700.otf") format("opentype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Museo Slab";
+  src: url("../font/Museo_Slab_900.otf") format("opentype");
+  font-weight: 900;
+}
+
+/* Italics var */
+@font-face {
+  font-family: "Museo Slab";
+  src: url("../font/Museo_Slab_100italic.otf") format("opentype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Museo Slab";
+  src: url("../font/Museo_Slab_300italic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Museo Slab";
+  src: url("../font/Museo_Slab_500italic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Museo Slab";
+  src: url("../font/Museo_Slab_700italic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Museo Slab";
+  src: url("../font/Museo_Slab_900italic.otf") format("opentype");
+  font-weight: 900;
+  font-style: italic;
+}
