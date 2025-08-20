@@ -57,6 +57,10 @@ function documentLoaded() {
     document.querySelector(".button-map").addEventListener("click", ()=> {
       form.classList.remove("hide");
     })
+    document.querySelector(".cancel-btn").addEventListener("click", ()=> {
+      form.classList.add("hide");
+    })
+
 }
 
 
