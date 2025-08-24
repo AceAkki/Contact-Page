@@ -49,9 +49,7 @@ function documentLoaded() {
 
 
     classForm.formDropDown("#queryBtn","#queryType");
-    classForm.formDropDown("#projectBtn","#projectType");
     classForm.formChecked("#queryType");
-    classForm.formChecked("#projectType");
 
 
     document.querySelector(".button-map").addEventListener("click", ()=> {

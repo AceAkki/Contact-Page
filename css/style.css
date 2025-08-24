@@ -26,6 +26,16 @@
   font-family: "Museo Slab", sans-serif;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* Header */
 .header-wrap {
   display: flex;
@@ -132,6 +142,8 @@ ul.header-links {
 
 .enquiry-form form>div {
   margin: 0 1rem;
+  align-self: center;
+  min-width: 100%;
 }
 
 
@@ -141,6 +153,7 @@ ul.header-links {
   min-width: 100%;
   max-width: 100%;
   padding: 1rem 0 1rem 1rem;
+  box-sizing: border-box;
   border-bottom: 2px solid var(--input-boder-color);
   font-size: 1.1rem;
   font-family: "Helvetica Neue", sans-serif;
@@ -158,8 +171,9 @@ ul.header-links {
 
   min-width: 100%;
   max-width: 100%;
-  padding: 1rem 0 1rem 1rem;
+  padding: 1rem;
   border-bottom: 2px solid var(--input-boder-color);
+  box-sizing: border-box;
 }
 
 .enquiry-form .form-select>span{
@@ -172,20 +186,31 @@ ul.header-links {
   min-width: 100%;
   background: var(--form-option-bg);
   border-bottom: 2px solid var(--intput-text-color);
-  padding: 2rem 0 1rem 1rem;
+  padding: 2rem 1rem;
   box-shadow: 0px 0px 1px #00000029;
   font-size: 1.1rem;
   font-family: "Helvetica Neue", sans-serif;
-  opacity: 70%;
   color: var(--intput-text-color);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-item>span {
+  opacity: 70%;
 }
 
 
+.enquiry-form form>div:has(.sendBtn) {
+  text-align: center;
+}
 .sendBtn {
   background: var(--hightlight-color);
   color: var(--main-bg-color);
   padding: 1rem;
   max-width: 90%;
+  min-width: 90%;
 }
 
 
