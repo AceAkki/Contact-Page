@@ -13,19 +13,20 @@
     getHeaderHeight(header);
     scrollHeader(header);
 
-    
+    5
     if (m1024.matches) {
-      form.classList.remove("hide");     
-    } else if (m360.matches) {
       form.classList.add("hide");     
+    } else if (m360.matches) {
+      form.classList.remove("hide");     
       mobileDropdown(headerButton, headerLinks);   
 
     }
 
 
-    classForm.formDropDown("#queryBtn","#queryType", "hide");
-    classForm.formChecked("#queryType", ".form-item", "checked", "hide");
-
+    // classForm.formDropDown("#queryBtn","#queryType", "hide");
+    // classForm.formChecked("#queryType", ".form-item", "checked", "hide");
+    classForm.formDropDown(form, ".form-select", ".form-group", ".form-options", "hide");
+    classForm.formChecked(form, ".form-options", ".form-item", "checked", "hide");
 
     document.querySelector(".button-map").addEventListener("click", ()=> {
       form.classList.remove("hide");
@@ -37,20 +38,22 @@
 })()
 
 class Form {
-  formDropDown (btnSelector, elemSelector, classToToggle) {
-    document.querySelector(btnSelector).addEventListener("click", () => {
-      this.toggleClass (elemSelector, classToToggle)
-    });
+  formDropDown (form, btnSelector, parentSelector, elemSelector, classToToggle) {
+    form.addEventListener("click", (e)=> {
+      if(e.target.closest(btnSelector)) {
+        this.toggleClass (e.target.closest(btnSelector).closest(parentSelector).querySelector(elemSelector), classToToggle)
+      }
+    }) 
   }
 
-  toggleClass (elemSelector, classToToggle){
-    console.log(elemSelector, classToToggle)
-    document.querySelector(elemSelector).classList.toggle(classToToggle);
+  toggleClass (elem, classToToggle){
+    elem.classList.toggle(classToToggle);
   }
 
-  formChecked(selector, targetClass, checkClass, classToToggle) {
-     document.querySelector(selector).addEventListener("click", (e) => {
-      if (e.target.closest(targetClass) && !(document.getElementsByClassName(checkClass).length > 0)) {
+  formChecked(form, selector, targetClass, checkClass, classToToggle) {
+    form.addEventListener("click", (e)=> {
+      if(e.target.closest(selector)) {
+ if (e.target.closest(targetClass) && !(document.getElementsByClassName(checkClass).length > 0)) {
         let targetItem = e.target.closest(targetClass);
         let targetValue;
         if (targetItem.querySelector("img")) return;
@@ -64,13 +67,17 @@ class Form {
           setTimeout( ()=> {
             document.querySelectorAll(targetClass).forEach(elm => { elm.classList.remove(checkClass) });
             targetItem.querySelector("img").remove();
-            this.toggleClass(selector, classToToggle);
+            this.toggleClass(document.querySelector(selector), classToToggle);
             this.createOptions(document.querySelector(selector).parentNode.parentNode, targetItem.closest(".form-group"), targetValue)
           }, 2000)
         }
 
       }
-    });
+      }
+    })
+    //  document.querySelector().addEventListener("click", (e) => {
+     
+    // });
   }
 
   createOptions(mainParent, parentNode, targetValue){
@@ -87,10 +94,24 @@ class Form {
 
     let targetOptions = document.createElement("div");
     targetOptions.classList.add("form-options", "hide");
-    
+    targetGroup.appendChild(targetOptions);
+
+    Array.from([...Array(8).keys()]).forEach(num => {
+      if (num > 0) {
+        let elmOption = document.createElement("div");
+        elmOption.classList.add("form-item");
+        elmOption.setAttribute("data-value",`${targetValue}-${num}`);
+        let optionSpan = document.createElement("span");
+        optionSpan.textContent = `${targetValue}-${num}`;
+        targetOptions.appendChild(elmOption);
+        elmOption.appendChild(optionSpan);
+
+      }
+    })
 
     
-
+    classForm.formDropDown(".form-select", ".form-group", ".form-options", "hide");
+    classForm.formChecked(".form-options", ".form-item", "checked", "hide");
     
   }
   
