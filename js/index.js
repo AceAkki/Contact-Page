@@ -13,7 +13,7 @@
     getHeaderHeight(header);
     scrollHeader(header);
 
-    5
+    
     if (m1024.matches) {
       form.classList.add("hide");     
     } else if (m360.matches) {
@@ -25,8 +25,8 @@
 
     // classForm.formDropDown("#queryBtn","#queryType", "hide");
     // classForm.formChecked("#queryType", ".form-item", "checked", "hide");
-    classForm.formDropDown(form, ".form-select", ".form-group", ".form-options", "hide");
-    classForm.formChecked(form, ".form-options", ".form-item", "checked", "hide");
+    classForm.formDropDown(form.querySelector("form"), ".form-select", ".form-group", ".form-options", "hide");
+    classForm.formChecked(form.querySelector("form"), ".form-options", ".form-item", "checked", "hide");
 
     document.querySelector(".button-map").addEventListener("click", ()=> {
       form.classList.remove("hide");
@@ -39,6 +39,7 @@
 
 class Form {
   formDropDown (form, btnSelector, parentSelector, elemSelector, classToToggle) {
+    console.log(form)
     form.addEventListener("click", (e)=> {
       if(e.target.closest(btnSelector)) {
         this.toggleClass (e.target.closest(btnSelector).closest(parentSelector).querySelector(elemSelector), classToToggle)
@@ -53,7 +54,7 @@ class Form {
   formChecked(form, selector, targetClass, checkClass, classToToggle) {
     form.addEventListener("click", (e)=> {
       if(e.target.closest(selector)) {
- if (e.target.closest(targetClass) && !(document.getElementsByClassName(checkClass).length > 0)) {
+        if (e.target.closest(targetClass) && !(document.getElementsByClassName(checkClass).length > 0)) {
         let targetItem = e.target.closest(targetClass);
         let targetValue;
         if (targetItem.querySelector("img")) return;
@@ -107,12 +108,7 @@ class Form {
         elmOption.appendChild(optionSpan);
 
       }
-    })
-
-    
-    classForm.formDropDown(".form-select", ".form-group", ".form-options", "hide");
-    classForm.formChecked(".form-options", ".form-item", "checked", "hide");
-    
+    })    
   }
   
 
