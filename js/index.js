@@ -1,66 +1,50 @@
 (function init() {
   document.addEventListener("DOMContentLoaded", () => {
-    let header = document.querySelector(".header-wrap");
-    let headerButton = document.querySelector(".header-btn");
-    let headerLinks = document.querySelector(".header-links");
-    let form = document.querySelector(".enquiry-form");
-
     let m1024 = window.matchMedia("(min-width:1024px)");
     let m360 = window.matchMedia("(min-width: 360px)");
-    getHeaderHeight(header);
-    scrollHeader(header);
+    getHeaderHeight($(".header-wrap"));
+    scrollHeader($(".header-wrap"));
 
     if (m1024.matches) {
-      form.classList.add("hide");
-    } else if (m360.matches) {
-      form.classList.remove("hide");
-      mobileDropdown(headerButton, headerLinks);
+      $(".enquiry-form").classList.add("hide");
+    } else {
+      $(".enquiry-form").classList.remove("hide");
+      mobileDropdown($(".header-btn"), $(".header-links"));
     }
 
-    // classForm.formDropDown("#queryBtn","#queryType", "hide");
-    // classForm.formChecked("#queryType", ".form-item", "checked", "hide");
-    classForm.formDropDown(
-      form.querySelector("form"),
-      ".form-select",
-      ".form-group",
-      ".form-options",
-      "hide"
-    );
-    classForm.formChecked(
-      form.querySelector("form"),
-      ".form-options",
-      ".form-item",
-      "checked",
-      "hide"
-    );
+    classForm.formDropDown({
+      form:$(".enquiry-form").querySelector("form"),
+      btnSelector: ".form-select",
+      parentSelector: ".form-group",
+      elemSelector: ".form-options",
+      classToToggle:"hide"});
+    classForm.formChecked({
+      form:$(".enquiry-form").querySelector("form"),
+      selector:".form-options",
+      targetClass:".form-item",
+      checkClass:"checked",
+      classToToggle:"hide"});
 
-    document.querySelector(".button-map").addEventListener("click", () => {
+    $(".button-map").addEventListener("click", () => {
       form.classList.remove("hide");
     });
-    document.querySelector(".cancel-btn").addEventListener("click", () => {
+    $(".cancel-btn").addEventListener("click", () => {
       form.classList.add("hide");
     });
+
   });
 })();
 
+function $(selector) {
+  return document.querySelector(selector);
+}
+
+
 class Form {
-  formDropDown(form, btnSelector, parentSelector, elemSelector, classToToggle) {
+  formDropDown({form, btnSelector, parentSelector, elemSelector, classToToggle}) {
     form.addEventListener("click", (e) => {
       if (e.target.closest(btnSelector)) {
-        console.log(
-          e.target
-            .closest(btnSelector)
-            .closest(parentSelector)
-            .querySelector(elemSelector),
-          classToToggle
-        );
-        this.toggleClass(
-          e.target
-            .closest(btnSelector)
-            .closest(parentSelector)
-            .querySelector(elemSelector),
-          classToToggle
-        );
+        this.toggleClass(e.target.closest(btnSelector).closest(parentSelector).querySelector(elemSelector),classToToggle);
       }
     });
   }
@@ -69,9 +53,10 @@ class Form {
     elem.classList.toggle(classToToggle);
   }
 
-  formChecked(form, selector, targetClass, checkClass, classToToggle) {
+  formChecked({form, selector, targetClass, checkClass, classToToggle}) {
+    let flag = 0;
     form.addEventListener("click", (e) => {
-      if (e.target.closest(selector)) {
+      if (e.target.closest(selector))  {
         if (e.target.closest(targetClass) && !(document.getElementsByClassName(checkClass).length > 0)) {
           let targetItem = e.target.closest(targetClass);
           let targetValue;
@@ -83,26 +68,20 @@ class Form {
           targetValue = targetItem.getAttribute("data-value");
           if (!targetValue) return 
           setTimeout(() => {
+            this.toggleClass(targetItem.closest(selector), classToToggle);
+            if (flag <= 0) {
             document.querySelectorAll(targetClass).forEach((elm) => {
               elm.classList.remove(checkClass);
             });
-            targetItem.querySelector("img").remove();
-            console.log(document.querySelector(selector));
-            this.toggleClass(targetItem.closest(selector), classToToggle);
-            this.createOptions(
-              document.querySelector(selector).parentNode.parentNode,
-              targetItem.closest(".form-group"),
-              targetValue
-            );
+            // targetItem.querySelector("img").remove();
+              this.createOptions(document.querySelector(selector).parentNode.parentNode,targetItem.closest(".form-group"),targetValue);
+              flag += 1;
+              console.log(flag)
+            }
           }, 2000);
-        
-        
         }
       }
     });
-    //  document.querySelector().addEventListener("click", (e) => {
-
-    // });
   }
 
   createOptions(mainParent, parentNode, targetValue) {
