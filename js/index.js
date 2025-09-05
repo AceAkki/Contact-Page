@@ -26,10 +26,10 @@
       classToToggle:"hide"});
 
     $(".button-map").addEventListener("click", () => {
-      form.classList.remove("hide");
+      $(".enquiry-form").classList.remove("hide");
     });
     $(".cancel-btn").addEventListener("click", () => {
-      form.classList.add("hide");
+      $(".enquiry-form").classList.add("hide");
     });
 
   });
@@ -60,7 +60,8 @@ class Form {
         if (e.target.closest(targetClass) && !(document.getElementsByClassName(checkClass).length > 0)) {
           let targetItem = e.target.closest(targetClass);
           let targetValue;
-          if (targetItem.querySelector("img")) return;
+          console.log(targetItem.parentNode.querySelectorAll("img"), targetItem.parentNode.querySelector("img")==! null)
+          if (targetItem.parentNode.querySelector("img") ==! null) targetItem.parentNode.querySelectorAll("img").forEach(img => img.remove() ) ;
           let createImg = document.createElement("img");
           createImg.src = "img/checkMark.svg";
           targetItem.appendChild(createImg);
